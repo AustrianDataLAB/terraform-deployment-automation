@@ -9,7 +9,7 @@ on:
     types: [started]
 
 env:
-  REGISTRY: ghcr.io/austriandatalab
+  REGISTRY: ghcr.io
   IMAGE_NAME: hello-world
 
 jobs:
