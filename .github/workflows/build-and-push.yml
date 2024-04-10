@@ -1,0 +1,39 @@
+name: Build and Push Docker Image to GHCR
+
+on:
+  push:
+    branches: [ main ]  # Trigger the workflow on push to the main branch
+  pull_request:
+    branches: [ main ]  # Trigger the workflow on pull requests targeting the main branch
+  workflow_dispatch:    # Allow manual trigger of the workflow
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Log in to the GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push the Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .  # Specifies the build context directory
+        file: ./Dockerfile  # Path to the Dockerfile
+        push: true
+        tags: ghcr.io/${{ github.repository }}/minimal-hello:latest  # Replace with your desired image name
+
+    - name: Verify the image
+      run: |
+        docker pull ghcr.io/${{ github.repository }}/minimal-hello:latest
+        docker run --rm ghcr.io/${{ github.repository }}/minimal-hello:latest
