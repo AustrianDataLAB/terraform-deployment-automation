@@ -6,7 +6,6 @@ services:
       context: .
       dockerfile: ./Dockerfile
     container_name: flask-demo-app
-    image: 'flask-demo-app:latest'
     environment:
       - MONGO_SERVICE_HOST=pacman-mongodb-integration 
       - MONGO_USE_SSL=false
