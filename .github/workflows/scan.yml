@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io/austriandatalab
-  IMAGE_NAME: flask-app
+  IMAGE_NAME: flask-demo-app
 
 jobs:
   Trivy-Scan:

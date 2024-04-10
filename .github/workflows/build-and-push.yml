@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: flask-app
+  IMAGE_NAME: flask-demo-app
 
 jobs:
   build_and_push:
