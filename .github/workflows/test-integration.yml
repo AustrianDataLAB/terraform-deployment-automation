@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build and Test
-        run: make sut
+        run: make up
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
