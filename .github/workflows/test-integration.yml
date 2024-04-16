@@ -1,24 +1,31 @@
 name: Run integration test using docker-compose
-on: 
+on:
   push:
     branches:
-      - main 
-      - testing/andrej
-      #- features/lecture5-2
+      - main
+      - testing/miljon3
   pull_request:
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 20  # Adjusted to give more time for the vulnerability scan and tests
+
     steps:
       - uses: actions/checkout@v4
-      - name: make
+
+      - name: Build and Test
         run: make sut
-      # - name: Set up Python ${{ matrix.python-version }}
-      #  uses: actions/setup-python@v4
-      #  with:
-      #    python-version: ${{ matrix.python-version }}
-      # - name: Display Python version
-      #  run: python -m unittest test_app.py
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ env.REGISTRY }}/${{ env.REPO_NAME_LOWER }}/${{ env.IMAGE_NAME }}:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: false
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
       - name: TearDown
         run: make down
