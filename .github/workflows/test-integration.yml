@@ -1,11 +1,13 @@
 name: Run integration test using docker-compose
+runs-on: self-hosted
 on: 
   push:
     branches:
       - main 
-      - testing/andrej
+      - testing/*
       #- features/lecture5-2
   pull_request:
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
