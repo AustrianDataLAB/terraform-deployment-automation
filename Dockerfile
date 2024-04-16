@@ -1,6 +1,11 @@
 # Use an official Python runtime as a parent image
 FROM python:3.12-alpine
 
+# Update necessary packages
+RUN apk update && \
+    apk upgrade expat && \
+    rm -rf /var/cache/apk/*
+
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
