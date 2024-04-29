@@ -1,5 +1,4 @@
 name: "Code Scanning"
-
 on:
   push:
     branches: [ main ]  # Trigger the workflow on push to the main branch
