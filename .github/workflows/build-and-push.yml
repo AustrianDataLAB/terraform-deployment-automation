@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: coder-ood
+  IMAGE_NAME: on_demand
 
 jobs:
   build_and_push:
@@ -43,7 +43,7 @@ jobs:
         docker-compose -f docker-compose.yaml build
     - name: Push the Docker image to GitHub Container Registry
       run: |
-        docker-compose -f docker-compose.yaml push app
+        docker-compose -f docker-compose.yaml push on_demand
     - name: Verify the image
       run: |
         docker pull ${{ env.REGISTRY }}/${{ env.REPO_NAME_LOWER }}/${{ env.IMAGE_NAME }}:latest
