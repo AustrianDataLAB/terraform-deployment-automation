@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: terraform-deployment-automation_on_demand
+  IMAGE_NAME: on_demand
 
 jobs:
   build_and_push:
