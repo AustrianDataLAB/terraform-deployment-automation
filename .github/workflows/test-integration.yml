@@ -3,12 +3,13 @@ on:
   push:
     branches:
       - main 
-      - testing/andrej
+      - testing/*
       #- features/lecture5-2
   pull_request:
+  workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 2
     steps:
       - uses: actions/checkout@v4
