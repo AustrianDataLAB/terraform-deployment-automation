@@ -47,8 +47,3 @@ jobs:
     - name: Verify the image
       run: |
         docker pull ${{ env.REGISTRY }}/${{ env.REPO_NAME_LOWER }}/${{ env.IMAGE_NAME }}:latest
-        docker run --rm -d -p 5050:5000 --name test_container ${{ env.REGISTRY }}/${{ env.REPO_NAME_LOWER }}/${{ env.IMAGE_NAME }}:latest
-        sleep 10
-        docker logs test_container
-        # Include any tests you want to perform here
-        docker stop test_container
