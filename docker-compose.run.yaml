@@ -1,0 +1,13 @@
+services:
+  on_demand:
+    image: ghcr.io/austriandatalab/terraform-deployment-automation/terraform-deployment-automation_on_demand:latest
+    networks:
+      - ood-coder-network
+  coder:
+    image: ghcr.io/coder/coder:latest
+    networks:
+      - ood-coder-network
+  database:
+    image: postgres:14.2
+    networks:
+      - ood-coder-network
