@@ -3,8 +3,11 @@ services:
   on_demand:
     build: https://github.com/andrejcermak/ondemand.git#master
     command: [ "/opt/ood/launch" ]
-    env_file:
-      - .env
+    environment:
+      - SERVER_NAME
+      - OIDC_CLIENT_ID
+      - OIDC_CLIENT_SECRET
+      - OIDC_LOGOUT_REDIRECT
     networks:
       - ood-coder-network
     ports:

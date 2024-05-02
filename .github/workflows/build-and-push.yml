@@ -28,6 +28,12 @@ jobs:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Load env variables from secrets on github
+      run: |
+        echo "SERVER_NAME=${{ secrets.SERVER_NAME }}" >> $GITHUB_ENV
+        echo "OIDC_CLIENT_ID=${{ secrets.OIDC_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "OIDC_CLIENT_SECRET=${{ secrets.OIDC_CLIENT_SECRET }}" >> $GITHUB_ENV
+        echo "OIDC_LOGOUT_REDIRECT=${{ secrets.OIDC_LOGOUT_REDIRECT }}" >> $GITHUB_ENV
 
     - name: Set lowercase repo name
       run: echo "REPO_NAME_LOWER=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
