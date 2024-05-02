@@ -3,6 +3,7 @@ services:
   on_demand:
     build: https://github.com/andrejcermak/ondemand.git#master
     command: [ "/opt/ood/launch" ]
+    image: ghcr.io/austriandatalab/terraform-deployment-automation_on_demand # Specified image name for pushing
     environment:
       - SERVER_NAME
       - OIDC_CLIENT_ID
