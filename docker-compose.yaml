@@ -9,7 +9,7 @@ services:
       - OIDC_CLIENT_SECRET
       - OIDC_LOGOUT_REDIRECT
     networks:
-      - ood-coder-networkdo
+      - ood-coder-network
     ports:
       - 80:80
   coder:
