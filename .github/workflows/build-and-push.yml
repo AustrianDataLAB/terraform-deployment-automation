@@ -2,14 +2,14 @@ name: Build and Push Docker Image to GHCR
 
 on:
   push:
-    branches: [ main ]  # Trigger the workflow on push to the main branch
+    branches: [ main, dev ]  # Trigger the workflow on push to the main branch
   pull_request:
-    branches: [ main ]  # Trigger the workflow on pull requests targeting the main branch
+    branches: [ main, dev ]  # Trigger the workflow on pull requests targeting the main branch
   workflow_dispatch:    # Allow manual trigger of the workflow
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: hello-world
+  IMAGE_NAME: coder-ood
 
 jobs:
   build_and_push:
