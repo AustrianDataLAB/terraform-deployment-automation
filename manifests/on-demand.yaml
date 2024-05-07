@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: on-demand
+  namespace: petar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: on-demand
+  template:
+    metadata:
+      labels:
+        app: on-demand
+    spec:
+      containers:
+      - name: on-demand
+        image: ghcr.io/austriandatalab/terraform-deployment-automation/on_demand:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        env:
+        - name: SERVER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: SERVER_NAME
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: OIDC_CLIENT_ID
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: OIDC_CLIENT_SECRET
+        - name: OIDC_LOGOUT_REDIRECT
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: OIDC_LOGOUT_REDIRECT
