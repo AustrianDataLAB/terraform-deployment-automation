@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deploymentOnDemand.name }}
+  namespace: {{ .Values.deploymentOnDemand.namespace }}
+spec:
+  replicas: {{ .Values.deploymentOnDemand.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deploymentOnDemand.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deploymentOnDemand.appLabel }}
+    spec:
+      containers:
+      - name: {{ .Values.deploymentOnDemand.container.name }}
+        image: {{ .Values.deploymentOnDemand.container.image }}
+        ports:
+        - containerPort: {{ .Values.deploymentOnDemand.container.port }}
+        resources:
+          requests:
+            memory: {{ .Values.deploymentOnDemand.container.resources.requests.memory }}
+            cpu: {{ .Values.deploymentOnDemand.container.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.deploymentOnDemand.container.resources.limits.memory }}
+            cpu: {{ .Values.deploymentOnDemand.container.resources.limits.cpu }}
+        env:
+        - name: SERVER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: SERVER_NAME
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: OIDC_CLIENT_ID
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: OIDC_CLIENT_SECRET
+        - name: OIDC_LOGOUT_REDIRECT
+          valueFrom:
+            secretKeyRef:
+              name: on-demand-secrets
+              key: OIDC_LOGOUT_REDIRECT
