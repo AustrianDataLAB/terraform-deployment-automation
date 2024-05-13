@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: on-demand
-  namespace: petar
+  name: {{ .Values.deploymentOnDemand.name }}
+  namespace: {{ .Values.deploymentOnDemand.namespace }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.deploymentOnDemand.replicas }}
   selector:
     matchLabels:
-      app: on-demand
+      app: {{ .Values.deploymentOnDemand.appLabel }}
   template:
     metadata:
       labels:
-        app: on-demand
+        app: {{ .Values.deploymentOnDemand.appLabel }}
     spec:
       containers:
-      - name: on-demand
-        image: ghcr.io/austriandatalab/terraform-deployment-automation/on_demand:latest
+      - name: {{ .Values.deploymentOnDemand.container.name }}
+        image: {{ .Values.deploymentOnDemand.container.image }}
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Values.deploymentOnDemand.container.port }}
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "250m"
+            memory: {{ .Values.deploymentOnDemand.container.resources.requests.memory }}
+            cpu: {{ .Values.deploymentOnDemand.container.resources.requests.cpu }}
           limits:
-            memory: "256Mi"
-            cpu: "500m"
+            memory: {{ .Values.deploymentOnDemand.container.resources.limits.memory }}
+            cpu: {{ .Values.deploymentOnDemand.container.resources.limits.cpu }}
         env:
         - name: SERVER_NAME
           valueFrom:

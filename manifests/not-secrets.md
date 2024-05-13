@@ -1,8 +1,8 @@
 kubectl create secret generic on-demand-secrets \
-  --from-literal=SERVER_NAME=your.server.name \
-  --from-literal=OIDC_CLIENT_ID=your-client-id \
-  --from-literal=OIDC_CLIENT_SECRET=your-client-secret \
-  --from-literal=OIDC_LOGOUT_REDIRECT=your-logout-redirect-url \
+  --from-literal=SERVER_NAME="localhost" \
+  --from-literal=OIDC_CLIENT_ID= \
+  --from-literal=OIDC_CLIENT_SECRET= \
+  --from-literal=OIDC_LOGOUT_REDIRECT="http://localhost/oidc/redirect_uri" \
   --namespace=petar
 
   this is how you setup secrets

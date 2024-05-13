@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deploymentCoder.name }}
+  namespace: {{ .Values.deploymentCoder.namespace }}
+spec:
+  replicas: {{ .Values.deploymentCoder.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deploymentCoder.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deploymentCoder.appLabel }}
+    spec:
+      containers:
+      - name: {{ .Values.deploymentCoder.container.name }}
+        image: {{ .Values.deploymentCoder.container.image }}
+        env: 
+        - name: CODER_HTTP_ADDRESS
+          value: {{ .Values.deploymentCoder.container.env.CODER_HTTP_ADDRESS }}
+        - name: CODER_ENVPROXY_ACCESS_URL
+          value: {{ .Values.deploymentCoder.container.env.CODER_ENVPROXY_ACCESS_URL }}
+        ports:
+        - containerPort: {{ .Values.deploymentCoder.container.port }}
+        resources:
+          requests:
+            memory: {{ .Values.deploymentCoder.container.resources.requests.memory }}
+            cpu: {{ .Values.deploymentCoder.container.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.deploymentCoder.container.resources.limits.memory }}
+            cpu: {{ .Values.deploymentCoder.container.resources.limits.cpu }}
+      serviceAccountName: {{ .Values.deploymentCoder.serviceAccountName }}
