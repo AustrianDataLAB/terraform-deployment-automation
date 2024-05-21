@@ -1,5 +1,11 @@
 kubernetesClusterDomain: cluster.local
 
+serviceCoder:
+  name: coder-service
+
+serviceOnDemand:
+  name: on-demand-service
+
 deploymentCoder:
   name: coder
   namespace: petar
