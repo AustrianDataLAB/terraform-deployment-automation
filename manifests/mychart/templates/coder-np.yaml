@@ -4,9 +4,15 @@ metadata:
   name: "coder-rule"
   namespace:  {{ .Values.deploymentCoder.namespace }}
 spec:
-  description: "L7 policy to restrict access to specific HTTP call"
+  description: "L3/4 policy to restrict access to specific port"
   endpointSelector:
     matchLabels:
       app: {{ .Values.deploymentCoder.appLabel }} 
   ingress:
-  - {}
+  - fromEndpoints:
+    - matchLabels:
+        app: {{ .Values.deploymentOnDemand.appLabel }} 
+    toPorts:
+    - ports:
+      - port: "7080"
+        protocol: TCP
