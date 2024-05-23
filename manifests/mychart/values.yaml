@@ -6,9 +6,11 @@ serviceCoder:
 serviceOnDemand:
   name: on-demand-service
 
+common:
+  namespace: petar
+
 deploymentCoder:
   name: coder
-  namespace: petar
   replicas: 1
   appLabel: coder
   serviceAccountName: coder-admin
@@ -29,7 +31,6 @@ deploymentCoder:
 
 deploymentOnDemand:
   name: on-demand
-  namespace: petar
   replicas: 1
   appLabel: on-demand
   container:
