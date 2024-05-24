@@ -1,0 +1,17 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "ood-rule"
+spec:
+  description: "L3/4 policy to restrict access to specific port"
+  endpointSelector:
+    matchLabels:
+      name: on-demand
+  ingress:
+  - from:
+    - ipBlock:
+      - cidr: 128.131.0.0/16 
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
