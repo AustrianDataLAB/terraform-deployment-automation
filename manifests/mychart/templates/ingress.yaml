@@ -2,8 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: basic-ingress
+  namespace: {{.Values.common.namespace }}  
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "ood-ip"
+    spec.ingressClassName: "gce"
+    kubernetes.io/ingress.regional-static-ip-name: "ood-ip"
 spec:
   defaultBackend:
     service:
