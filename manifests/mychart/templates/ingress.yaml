@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace:  {{ .Values.common.namespace }}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cluster-issuer
+spec:  
+  # ingressClassName: ondemand-ingress
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - pathType: Prefix     
+        path: "/"
+        backend:
+          service:
+            name: {{ .Values.serviceOnDemand.name }}
+            port:
+              number: {{ .Values.deploymentOnDemand.container.port }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
+      secretName: tls-lva-1-ingress
