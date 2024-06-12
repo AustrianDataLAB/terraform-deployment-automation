@@ -7,7 +7,7 @@ serviceOnDemand:
   name: on-demand-service
 
 common:
-  namespace: xcermak5
+  namespace: coder-ood
 
 ingress:
   name: basic-ingress
