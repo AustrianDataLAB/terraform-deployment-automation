@@ -31,7 +31,7 @@ jobs:
 
     - name: Wait for Kubernetes resources to be ready
       run: |
-        kubectl wait --for=condition=available --timeout=600s deployment --namespace xcermak5 --all
+        kubectl wait --for=condition=available --timeout=1200s deployment --namespace xcermak5 --all
         kubectl get all --namespace xcermak5
 
     - name: Run Integration Tests

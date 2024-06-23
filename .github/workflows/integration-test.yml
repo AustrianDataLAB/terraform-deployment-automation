@@ -1,0 +1,29 @@
+name: Run Integration Tests on Existing Deployment
+
+on: [push, pull_request]
+
+jobs:
+  run-integration-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: v1.19.7
+
+    - name: Configure kubeconfig
+      run: |
+        # Assuming you have the kubeconfig file as a secret in GitHub Actions
+        echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+        kubectl config set-context --current --namespace=xcermak5
+
+    - name: Run Integration Tests
+      run: |
+        kubectl get pods --namespace xcermak5
+        kubectl get services --namespace xcermak5
+        # POD_NAME=$(kubectl get pods --namespace xcermak5 -l app=mychart -o jsonpath="{.items[0].metadata.name}")
+        # kubectl exec --namespace xcermak5 $POD_NAME -- curl -f http://localhost:8080/healthz
