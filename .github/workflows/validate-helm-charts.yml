@@ -1,0 +1,22 @@
+name: Validate Helm Charts
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: v3.5.4
+
+    - name: Helm Lint
+      run: helm lint ./manifests/mychart
+
+    - name: Helm Template
+      run: helm template mychart ./manifests/mychart
