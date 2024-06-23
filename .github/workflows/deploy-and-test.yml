@@ -23,24 +23,27 @@ jobs:
     - name: Create Kubernetes cluster
       run: kind create cluster --name test-cluster
 
+    - name: Create Namespace
+      run: kubectl create namespace xcermak5
+
     - name: Helm Install
-      run: helm install mychart ./manifests/mychart
+      run: helm install mychart ./manifests/mychart --namespace xcermak5
 
     - name: Wait for Kubernetes resources to be ready
       run: |
-        kubectl wait --for=condition=available --timeout=600s deployment --all
-        kubectl get all
+        kubectl wait --for=condition=available --timeout=600s deployment --namespace xcermak5 --all
+        kubectl get all --namespace xcermak5
 
     - name: Run Integration Tests
       run: |
         # Example integration test commands
         # Replace these with your actual integration test commands
-        kubectl get pods
-        kubectl get services
+        kubectl get pods --namespace xcermak5
+        kubectl get services --namespace xcermak5
         # You can add curl or other commands to test the endpoints
         # For example:
-        # POD_NAME=$(kubectl get pods -l app=mychart -o jsonpath="{.items[0].metadata.name}")
-        # kubectl exec $POD_NAME -- curl -f http://localhost:8080/healthz
+        # POD_NAME=$(kubectl get pods --namespace xcermak5 -l app=mychart -o jsonpath="{.items[0].metadata.name}")
+        # kubectl exec --namespace xcermak5 $POD_NAME -- curl -f http://localhost:8080/healthz
 
     - name: Delete Kubernetes cluster
       run: kind delete cluster --name test-cluster
