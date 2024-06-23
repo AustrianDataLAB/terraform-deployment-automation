@@ -17,7 +17,7 @@ jobs:
 
     - name: Configure kubeconfig
       run: |
-        # Assuming you have the kubeconfig file as a secret in GitHub Actions
+        mkdir -p $HOME/.kube
         echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
         kubectl config set-context --current --namespace=xcermak5
 
