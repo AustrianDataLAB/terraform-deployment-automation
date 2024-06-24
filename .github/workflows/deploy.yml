@@ -1,3 +1,8 @@
+name: Deploy Helm Chart
+
+on:
+  workflow_dispatch:    # Allow manual trigger of the workflow
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
