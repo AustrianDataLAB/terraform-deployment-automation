@@ -1,0 +1,34 @@
+name: "Deploy Helm Chart"
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:    # Allow manual trigger of the workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Kubernetes context
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.29.1'  # Specify the kubectl version you want to use
+
+    - name: Set up Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: 'v3.15.1'
+
+    - name: Configure Kubeconfig
+      uses: azure/k8s-set-context@v1
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+
+    - name: Deploy with Helm
+      run: |
+        helm upgrade --install ${{ secrets.HELM_RELEASE_NAME }} ./manifests/mychart \
+          --namespace ${{ secrets.NAMESPACE }} \
+          --create-namespace
