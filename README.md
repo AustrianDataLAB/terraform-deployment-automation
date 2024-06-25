@@ -10,4 +10,6 @@ Organizations utilizing Open OnDemand to provide access to their supercomputers 
 
 ## How to use
 1. Clone the repository
-2. 
+2. ```helm upgrade --install $HELM_RELEASE_NAME ./manifests/mychart \
+          --namespace $NAMESPACE \
+          --create-namespace```
