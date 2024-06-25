@@ -1,7 +1,9 @@
-name: "Deploy Helm Chart"
+name: "Deploy Helm Chart 2"
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/* ]  # Trigger the workflow on push to the main branch
+  pull_request:
+    branches: [ main, feature/* ]  # Trigger the workflow on pull requests targeting the main branch
   workflow_dispatch:    # Allow manual trigger of the workflow
 
 jobs:
@@ -26,6 +28,9 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
+
+    - name: Check cluster
+      run: kubectl cluster-info
 
     - name: Deploy with Helm
       run: |
