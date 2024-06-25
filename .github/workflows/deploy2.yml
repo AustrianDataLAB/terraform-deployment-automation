@@ -29,6 +29,9 @@ jobs:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
 
+    - name: Check cluster
+      run: kubectl cluster-info
+
     - name: Deploy with Helm
       run: |
         helm upgrade --install ${{ secrets.HELM_RELEASE_NAME }} ./manifests/mychart \
