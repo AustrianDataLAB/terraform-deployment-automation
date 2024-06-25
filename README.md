@@ -5,6 +5,12 @@ It should effectively allow support for provisioning Openstack, which was disscu
 ## Value proposition
 As a user of Open OnDemand app, I want to generate a fresh cloud infrastructure on my OpenStack in a few easy steps, so I can do my work on them or run some interactive jobs (ie. Jupyter notebook, Rstudio).
 
+## Target audience
+Organizations utilizing Open OnDemand to provide access to their supercomputers to the users.
+
 ## How to use
 1. Clone the repository
-2. 
+2. `helm upgrade --install $HELM_RELEASE_NAME ./manifests/mychart --namespace $NAMESPACE --create-namespace`
+3. Create a coder template based on the coder/ folder inside the coder UI
+4. Based on https://github.com/andrejcermak/bc_openstack and https://osc.github.io/ood-documentation/latest/tutorials/tutorials-interactive-apps.html add template information 
+5. In OOD: Interactive Apps -> OpenStack via Coder -> Launch should create a OpenStack VM based on the template specification
