@@ -1,7 +1,7 @@
 name: "Deploy Helm Chart 2"
 on:
   push:
-    branches: [ main, feature/* ]  # Trigger the workflow on push to the main branch
+    branches: [ main, feature/*, deploy_pipeline_selfhosted ]  # Trigger the workflow on push to the main branch
   pull_request:
     branches: [ main, feature/* ]  # Trigger the workflow on pull requests targeting the main branch
   workflow_dispatch:    # Allow manual trigger of the workflow
