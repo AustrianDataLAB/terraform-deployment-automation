@@ -11,3 +11,6 @@ Organizations utilizing Open OnDemand to provide access to their supercomputers 
 ## How to use
 1. Clone the repository
 2. `helm upgrade --install $HELM_RELEASE_NAME ./manifests/mychart --namespace $NAMESPACE --create-namespace`
+3. Create a coder template based on the coder/ folder inside the coder UI
+4. Based on https://github.com/andrejcermak/bc_openstack and https://osc.github.io/ood-documentation/latest/tutorials/tutorials-interactive-apps.html add template information 
+5. In OOD: Interactive Apps -> OpenStack via Coder -> Launch should create a OpenStack VM based on the template specification
