@@ -4,6 +4,13 @@ on:
     branches: [ main ]
   workflow_dispatch:    # Allow manual trigger of the workflow
 
+  schedule:
+    - cron: '0 0 * * 1'
+  watch:
+    types: [started]
+
+
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
