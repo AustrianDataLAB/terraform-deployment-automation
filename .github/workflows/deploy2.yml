@@ -1,15 +1,10 @@
-name: "Deploy Helm Chart"
+name: "Deploy Helm Chart 2"
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]  # Trigger the workflow on push to the main branch
+  pull_request:
+    branches: [ main, dev ]  # Trigger the workflow on pull requests targeting the main branch
   workflow_dispatch:    # Allow manual trigger of the workflow
-
-  schedule:
-    - cron: '0 0 * * 1'
-  watch:
-    types: [started]
-
-
 
 jobs:
   deploy:
