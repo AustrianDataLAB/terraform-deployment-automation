@@ -5,6 +5,9 @@ It should effectively allow support for provisioning Openstack, which was disscu
 ## Value proposition
 As a user of Open OnDemand app, I want to generate a fresh cloud infrastructure on my OpenStack in a few easy steps, so I can do my work on them or run some interactive jobs (ie. Jupyter notebook, Rstudio).
 
+## Target audience
+Organizations utilizing Open OnDemand to provide access to their supercomputers to the users.
+
 ## How to use
 1. Clone the repository
 2. 
