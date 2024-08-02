@@ -1,6 +1,6 @@
 version: "3.9"
 services:
   on_demand:
-    build: https://github.com/soricpetar/ondemand.git#patch-1
+    build: https://github.com/andrejcermak/ondemand.git#oodCoreDevLocal
     command: [ "/opt/ood/launch" ]
     image: ghcr.io/austriandatalab/terraform-deployment-automation/on_demand # Specified image name for pushing
